@@ -17,6 +17,7 @@ module_1/2_docker_sql/ny_taxi_postgres_data/
 *.log
 *.tmp
 *.bak
+.idea/
 
 
 checkpoints/
