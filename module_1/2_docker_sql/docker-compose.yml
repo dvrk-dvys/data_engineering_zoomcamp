@@ -1,6 +1,6 @@
 #version: "3.9"
 services:
-  pgdatabase:
+  pgdatabase:  #this is the host name for the server
     image: postgres:13
     environment:
       - POSTGRES_USER="root"
