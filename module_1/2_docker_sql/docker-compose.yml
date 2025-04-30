@@ -10,6 +10,7 @@ services:
       - ./ny_taxi_postgres_data:/var/lib/postgresql/data:rw
     ports:
       - "5432:5432"
+
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -17,6 +18,8 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=ROOT
     ports:
       - "8080:80"
+    volumes:
+      - ./pgadmin_data:/var/lib/pgadmin
 
 
 # DOCKER COMPOSE ALLOWS FOR ME TO NOT NEET TO CREATE A NETWORK WHEN RUNNING DOCKER. IT HAPPENS AUTOMATICALLY

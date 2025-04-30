@@ -1,4 +1,5 @@
 module_1/2_docker_sql/ny_taxi_postgres_data/
+/module_1/2_docker_sql/pgadmin_data/
 *.csv
 *.tsv
 *.parquet
