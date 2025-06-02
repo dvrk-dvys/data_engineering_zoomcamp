@@ -30,16 +30,28 @@ def main(params):
     df = next(df_iter)
     print(pd.io.sql.get_schema(df, name=table_name, con=engine))
 
-    df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
-    df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+    # yellow
+    #df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
+    #df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
 
-    # df.head(n=0).to_sql(name=table_name, con=engine, if_exists='replace')
+    # green
+    df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
+    df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
+
+    df.head(n=0).to_sql(name=table_name, con=engine, if_exists='replace')
+
+    df.to_sql(name=table_name, con=engine, if_exists='append')
 
     for df in df_iter:
         t_start = time()
 
-        df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
-        df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+        #yellow
+        #df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
+        #df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+
+        #green
+        df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
+        df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
 
         df.to_sql(name=table_name, con=engine, if_exists='append')
 
@@ -80,3 +92,25 @@ if __name__ == '__main__':
 
 
 #docker build -t texi:ingest_v001 .
+
+
+#docker start -a -i pgadmin
+#------
+
+#first do docker compose up -d then run the script
+
+
+#url="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"
+#url="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz"
+
+#python ingest_data.py \
+#    --username=root \
+#    --password=root \
+#    --host=localhost \
+#    --port=5432 \
+#    --db=ny_taxi \
+#    --table_name=green_taxi
+#    --csv_url=${url}
+
+#then go to pg admin created by the docker compose
+# http://localhost:8080
